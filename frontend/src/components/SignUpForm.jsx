@@ -12,7 +12,7 @@ export const SignUpForm = () => {
     useEffect(() => {
         const checkUser = async () => {
             try {
-                const response = await fetch("/backend/UserApi");
+                const response = await fetch("https://skillsyard-team.onrender.com/userapi");
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,7 +38,7 @@ export const SignUpForm = () => {
 
         if (!existingUser) {
             try {
-                const response = await fetch("/backend/UserProfiles", {
+                const response = await fetch("https://skillsyard-team.onrender.com/userprofiles", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

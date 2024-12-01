@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
     res.send("Welcome to Home Page");
 });
 
-app.get("/backend/UserApi", async (req, res) => {
+app.get("/backend/userapi", async (req, res) => {
     try {
         const teamDetails = await Team_Model.find();
         res.status(200).send(teamDetails);
@@ -52,7 +52,7 @@ app.get("/backend/UserApi", async (req, res) => {
     }
 });
 
-app.post("/backend/UserProfiles", async (req, res) => {
+app.post("/backend/userprofiles", async (req, res) => {
     const { user_no, name, email, password } = req.body;
     try {
         // Hash password before saving
