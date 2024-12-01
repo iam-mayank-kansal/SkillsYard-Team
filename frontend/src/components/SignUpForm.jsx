@@ -6,10 +6,11 @@ export const SignUpForm = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate()
+    const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const CheckUser = async () => {
+        const checkUser = async () => {
             try {
                 const response = await fetch("/backend/UserApi");
 
@@ -17,47 +18,46 @@ export const SignUpForm = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const data = await response.text();
-                console.log("Raw response:", data);
+                const data = await response.json();
+                console.log("Fetched user data:", data);
 
-                if (data.trim()) {
-                    const UserAPIjson = JSON.parse(data);
-                    console.log(UserAPIjson);
-                } else {
-                    console.warn("No data received or empty response");
-                }
+                setUsers(data);
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
         };
 
-        CheckUser();
+        checkUser();
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = {
-            name,
-            email,
-            password
-        };
+        const formData = { name, email, password };
 
-        try {
-            const response = await fetch("/backend/UserProfiles", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-            if (response.ok) {
-                console.log("User profile submitted successfully");
-                navigate("/thanksSignUp")
-            } else {
-                console.error("Failed to submit user profile");
+        const existingUser = users.find(user => user.email === email);
+
+        if (!existingUser) {
+            try {
+                const response = await fetch("/backend/UserProfiles", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+                if (response.ok) {
+                    console.log("User profile submitted successfully");
+                    navigate("/thanksSignUp");
+                }
+                else {
+                    console.error("Failed to submit user profile");
+                }
             }
-        } catch (error) {
-            console.error("Error submitting user profile:", error);
+            catch (error) {
+                console.error("Error submitting user profile:", error);
+            }
+        } else {
+            alert("User with this email already exists");
         }
     };
 
@@ -73,6 +73,7 @@ export const SignUpForm = () => {
                         <input
                             type="text"
                             id="name"
+                            name="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             className="text-gray-800 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
@@ -87,6 +88,7 @@ export const SignUpForm = () => {
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="text-gray-800 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
@@ -101,6 +103,7 @@ export const SignUpForm = () => {
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="text-gray-800 w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
