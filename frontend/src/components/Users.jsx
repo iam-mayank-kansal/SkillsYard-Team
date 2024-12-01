@@ -99,38 +99,38 @@ export const Users = () => {
 
   return (
     <section className="py-[20px] flex flex-col gap-[30px]">
-      <h1 className="text-center text-[70px] uppercase text-white mb-[20px] font-serif tracking-wider">SkillsYard Team</h1>
+      <h1 className="text-center text-[50px] sm:text-[70px] font-serif tracking-wider text-white mb-[20px]">SkillsYard Team</h1>
       {usersAPI
         ? usersAPI.map((user, userIndex) => (
           <div
-            className="border-2 border-white flex w-[90vw] mx-auto gap-[50px] items-center p-[20px] px-[40px] text-white justify-between rounded-[15px]"
+            className="border-2 border-white flex w-[90vw] sm:w-[80vw] lg:w-[70vw] mx-auto gap-[20px] sm:gap-[50px] items-center p-[20px] px-[30px] sm:px-[40px] text-white justify-between rounded-[15px] hover:bg-gray-800 transition-all"
             key={userIndex}
           >
             <div>
-              <img src={defaultUserProfile} alt="defaultUserProfile" className="w-[100px]" />
+              <img src={defaultUserProfile} alt="defaultUserProfile" className="w-[80px] sm:w-[100px]" />
             </div>
-            <div className="translate-y-[-5px] w-full text-left">
-              <h2 className="text-[40px]">{user.name}</h2>
-              <p className="text-[20px]">{user.email}</p>
+            <div className="text-left w-full">
+              <h2 className="text-[30px] sm:text-[40px]">{user.name}</h2>
+              <p className="text-[16px] sm:text-[20px]">{user.email}</p>
             </div>
             <div className="relative">
               <img
                 src={settingClick[userIndex] ? cross : setting}
                 alt="setting"
-                width="50px"
+                width="40px"
                 className="cursor-pointer"
                 onClick={() => handleSettingClick(userIndex)}
               />
               {settingClick[userIndex] && (
-                <div className="absolute bg-white text-black px-[50px] py-[15px] flex flex-col gap-[10px] rounded-[10px] top-[-130px] left-[50%] translate-x-[-50%] transition-transform duration-500 scale-100">
+                <div className="absolute bg-white text-black px-[30px] sm:px-[50px] py-[10px] sm:py-[15px] flex flex-col gap-[10px] rounded-[10px] top-[-130px] left-[50%] translate-x-[-50%] transition-transform duration-500 scale-100">
                   <h3
-                    className="text-[23px] font-semibold cursor-pointer"
+                    className="text-[18px] sm:text-[23px] font-semibold cursor-pointer"
                     onClick={() => handleUpdateUser(userIndex, user)}
                   >
                     Update
                   </h3>
                   <h3
-                    className="text-[23px] font-semibold cursor-pointer"
+                    className="text-[18px] sm:text-[23px] font-semibold cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       handleDeleteUser(user);
@@ -143,10 +143,10 @@ export const Users = () => {
             </div>
             {updateIndex === userIndex && (
               <div
-                className="fixed bg-white h-[70vh] w-[30vw] top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] rounded-[10px] flex justify-center items-center z-[1000]"
+                className="fixed bg-white h-[60vh] sm:h-[70vh] w-[80vw] sm:w-[30vw] top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] rounded-[10px] flex justify-center items-center z-[1000] overflow-y-auto"
               >
-                <form className="px-[50px] w-[98%]">
-                  <h1 className="text-[45px] font-bold text-black font-sans text-center pb-[30px] uppercase">
+                <form className="px-[20px] sm:px-[50px] w-full">
+                  <h1 className="text-[35px] sm:text-[45px] font-bold text-black font-sans text-center pb-[30px] uppercase">
                     Updation Form
                   </h1>
                   <div className="mb-6">

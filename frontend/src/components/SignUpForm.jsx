@@ -7,13 +7,11 @@ export const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const checkUser = async () => {
             try {
-                const response = await fetch("https://skillsyard-team.onrender.com/userapi");
-
+                const response = await fetch("https://skillsyard-team.onrender.com/backend/userprofiles");
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -63,8 +61,10 @@ export const SignUpForm = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
-            <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-lg animate-fade-in">
-                <h2 className="text-3xl font-bold mb-8 text-center text-gray-700 animate-slide-down">Sign Up</h2>
+            <div className="bg-white p-6 sm:p-10 rounded-lg shadow-lg w-full sm:max-w-lg animate-fade-in">
+                <h2 className="text-3xl font-bold mb-8 text-center text-gray-700 animate-slide-down text-xl sm:text-3xl">
+                    Sign Up
+                </h2>
                 <form method="POST" onSubmit={handleSubmit}>
                     <div className="mb-6">
                         <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
