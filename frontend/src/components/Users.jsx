@@ -22,7 +22,7 @@ export const Users = () => {
   // Fetch Users API
   const fetchUsers = async () => {
     try {
-      let response = await fetch("https://skillsyard-team.onrender.com/userapi");
+      let response = await fetch("https://skillsyard-team.onrender.com/backend/userapi");
       response = await response.json();
       setUsersAPI(response);
       setSettingClick(new Array(response.length).fill(false)); // Initialize state for each user
@@ -53,7 +53,7 @@ export const Users = () => {
   const handleDeleteUser = async (user) => {
     console.log("Delete User");
     try {
-      const response = await fetch("https://skillsyard-team.onrender.com/deleteuser", {
+      const response = await fetch("https://skillsyard-team.onrender.com/backend/deleteuser", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export const Users = () => {
   const handleUpdateBTN = async (user) => {
     console.log("Updating User");
     try {
-      const Updatedresponse = await fetch("https://skillsyard-team.onrender.com/updateUser", {
+      const Updatedresponse = await fetch("https://skillsyard-team.onrender.com/backend/updateUser", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

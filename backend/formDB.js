@@ -51,7 +51,6 @@ app.get("/backend/userapi", async (req, res) => {
         res.status(500).send("Error retrieving data");
     }
 });
-
 app.post("/backend/userprofiles", async (req, res) => {
     const { user_no, name, email, password } = req.body;
     try {

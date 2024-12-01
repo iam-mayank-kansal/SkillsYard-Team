@@ -38,7 +38,7 @@ export const SignUpForm = () => {
 
         if (!existingUser) {
             try {
-                const response = await fetch("https://skillsyard-team.onrender.com/userprofiles", {
+                const response = await fetch("https://skillsyard-team.onrender.com/backend/userprofiles", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
